@@ -94,21 +94,39 @@ namespace HuntTheWumpus
             }
             else if (myPlayer.getDir() == 1)
             {
-                myPlayer.setCol(myPlayer.getCol() + 1);
-                myMap.Clear();
-                myMap.Draw(myPlayer);
-            
+                if (myPlayer.getCol() % 2 == 1)
+                {
+                    myPlayer.setCol(myPlayer.getCol() + 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
+                else
+                {
+                    myPlayer.setCol(myPlayer.getCol() + 1);
+                    myPlayer.setRow(myPlayer.getRow() - 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
             }
             else if (myPlayer.getDir() == 2)
             {
-                myPlayer.setRow(myPlayer.getRow() + 1);
-                myPlayer.setCol(myPlayer.getCol() + 1);
-                myMap.Clear();
-                myMap.Draw(myPlayer);
-            
+                if (myPlayer.getCol() % 2 == 1)
+                {
+                    myPlayer.setRow(myPlayer.getRow() + 1);
+                    myPlayer.setCol(myPlayer.getCol() + 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
+                else
+                {
+                    myPlayer.setCol(myPlayer.getCol() + 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
             }
             else if (myPlayer.getDir() == 3)
             {
+                
                 myPlayer.setRow(myPlayer.getRow() + 1);
                 myMap.Clear();
                 myMap.Draw(myPlayer);
@@ -116,17 +134,36 @@ namespace HuntTheWumpus
             }
             else if (myPlayer.getDir() == 4)
             {
-                myPlayer.setRow(myPlayer.getRow() + 1);
-                myPlayer.setCol(myPlayer.getCol() - 1);
-                myMap.Clear();
-                myMap.Draw(myPlayer);
+                if (myPlayer.getCol() % 2 == 1)
+                {
+                    myPlayer.setRow(myPlayer.getRow() + 1);
+                    myPlayer.setCol(myPlayer.getCol() - 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
+                else
+                {
+                    myPlayer.setCol(myPlayer.getCol() - 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
             
             }
             else if (myPlayer.getDir() == 5)
             {
-                myPlayer.setCol(myPlayer.getCol() - 1);
-                myMap.Clear();
-                myMap.Draw(myPlayer);
+                if (myPlayer.getCol() % 2 == 1)
+                {
+                    myPlayer.setCol(myPlayer.getCol() - 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
+                else
+                {
+                    myPlayer.setCol(myPlayer.getCol() - 1);
+                    myPlayer.setRow(myPlayer.getRow() - 1);
+                    myMap.Clear();
+                    myMap.Draw(myPlayer);
+                }
             }
         }
 
