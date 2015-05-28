@@ -42,10 +42,7 @@ namespace HuntTheWumpus
         {
             map.FindForward(rowNum, colNum, dir, out rowNum, out colNum);
         }
-        public List<int[]> ReturnSight ()
-        {
-            return sight;
-        }
+
         public void UpdateSight(Map map)
         {
             sight.Clear();
@@ -64,9 +61,6 @@ namespace HuntTheWumpus
             }
 
             // Check directly in Front of the Entity
-            currentRow = rowNum;
-            currentCol = colNum;
-
             for (int i = 0; i < 4; i++)
             {
                 map.FindForward(currentRow, currentCol, dir, out currentRow, out currentCol);
@@ -74,9 +68,6 @@ namespace HuntTheWumpus
             }
 
             // Check to the Right of the Entity
-
-            currentRow = rowNum;
-            currentCol = colNum;
             for (int i = 0; i < 4; i++)
             {
                 map.FindForward(currentRow, currentCol, rightDir, out currentRow, out currentCol);

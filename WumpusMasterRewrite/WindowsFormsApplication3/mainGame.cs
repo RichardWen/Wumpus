@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,18 +17,32 @@ namespace HuntTheWumpus
         public static System.Drawing.Pen myRed = new Pen(Color.Crimson, 2);
         public static System.Drawing.Pen myWhite = new Pen(Color.White, 2);
         public static System.Drawing.Pen myPurple = new Pen(Color.Purple, 2);
+        public static System.Drawing.Pen myBlack = new Pen(Color.Black, 2);
+        public static System.Drawing.Pen myYellow = new Pen(Color.Yellow, 2);
         public static System.Drawing.SolidBrush myWhiteBrush = new SolidBrush(Color.White);
         public static System.Drawing.Graphics myGraphics = null;
         public static int width;
         public static int height;
+
         public Map myMap;
         public Player myPlayer;
+        public Wumpus myWumpus;
+        public Wumpi[] myWumpis;
+
+        public int turn = 0;
         
         public mainGame()
         {
-            InitializeComponent();
+          
+            Random rnd = new Random();
+            myMap = new Map(10, 18, 50);
             myPlayer = new Player(5, 5, 0);
-            myMap = new Map(10, 10, 50);
+            myWumpus = new Wumpus(4, 4, 3);
+            myWumpis = new Wumpi[5];
+            for (int i = 0; i < 5; i++ )
+            {
+                myWumpis[i] = new Wumpi(rnd.Next(10), rnd.Next(10), rnd.Next(6));
+            }
             this.Width = myMap.BufferX * 3 + myMap.getWidth() * myMap.getHex() * 2;
             width = myMap.BufferX * 3 + myMap.getWidth() * myMap.getHex() * 2;
             this.Height = myMap.BufferY * 3 + myMap.getHeight() * myMap.getHex() * 2;
@@ -43,13 +58,16 @@ namespace HuntTheWumpus
                     Start();
                     return true;
                 case Keys.Up:
-                    moveForward();
+                    myPlayer.MoveForward(myMap);
+                    Update();
                     return true;
                 case Keys.Left:
                     Turn(false);
+                    Update();
                     return true;
                 case Keys.Right:
                     Turn(true);
+                    Update();
                     return true;
             }
             return false;
@@ -58,115 +76,35 @@ namespace HuntTheWumpus
         public void Start()
         {
             myGraphics = this.CreateGraphics();
-            myMap.Draw(myPlayer);
+            myMap.Draw(myPlayer, myWumpus, myWumpis);
         }
+
+        public void Update()
+        {
+            myPlayer.UpdateSight(myMap);
+            foreach(int[] seenTile in myPlayer.sight)
+            {
+                Console.WriteLine(seenTile[0] + "," + seenTile[1]);
+            }
+            myWumpus.Update(myMap);
+            foreach (Wumpi wumpiInstance in myWumpis)
+            {
+                wumpiInstance.Update(myMap);
+            }
+            myMap.Clear();
+            myMap.Draw(myPlayer, myWumpus, myWumpis);
+        }
+
         public void Turn(bool isRight)
         {
             if (isRight == true)
             {
-                if(myPlayer.getDir() == 5) {
-                    myPlayer.updateDir(0);
-                }
-                else
-                {
-                    myPlayer.updateDir(myPlayer.getDir() + 1);
-                }
+                myPlayer.changeDir(1);
             }
             else
             {
-                if (myPlayer.getDir() == 0)
-                {
-                    myPlayer.updateDir(5);
-                }
-                else
-                {
-                    myPlayer.updateDir(myPlayer.getDir() - 1);
-                }
+                myPlayer.changeDir(-1);
             }
-        }
-        public void moveForward()
-        {
-            if (myPlayer.getDir() == 0)
-            {
-                myPlayer.setRow(myPlayer.getRow() - 1);
-                myMap.Clear();
-                myMap.Draw(myPlayer);
-            }
-            else if (myPlayer.getDir() == 1)
-            {
-                if (myPlayer.getCol() % 2 == 1)
-                {
-                    myPlayer.setCol(myPlayer.getCol() + 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-                else
-                {
-                    myPlayer.setCol(myPlayer.getCol() + 1);
-                    myPlayer.setRow(myPlayer.getRow() - 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-            }
-            else if (myPlayer.getDir() == 2)
-            {
-                if (myPlayer.getCol() % 2 == 1)
-                {
-                    myPlayer.setRow(myPlayer.getRow() + 1);
-                    myPlayer.setCol(myPlayer.getCol() + 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-                else
-                {
-                    myPlayer.setCol(myPlayer.getCol() + 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-            }
-            else if (myPlayer.getDir() == 3)
-            {
-                
-                myPlayer.setRow(myPlayer.getRow() + 1);
-                myMap.Clear();
-                myMap.Draw(myPlayer);
-            
-            }
-            else if (myPlayer.getDir() == 4)
-            {
-                if (myPlayer.getCol() % 2 == 1)
-                {
-                    myPlayer.setRow(myPlayer.getRow() + 1);
-                    myPlayer.setCol(myPlayer.getCol() - 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-                else
-                {
-                    myPlayer.setCol(myPlayer.getCol() - 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-            
-            }
-            else if (myPlayer.getDir() == 5)
-            {
-                if (myPlayer.getCol() % 2 == 1)
-                {
-                    myPlayer.setCol(myPlayer.getCol() - 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-                else
-                {
-                    myPlayer.setCol(myPlayer.getCol() - 1);
-                    myPlayer.setRow(myPlayer.getRow() - 1);
-                    myMap.Clear();
-                    myMap.Draw(myPlayer);
-                }
-            }
-        }
-
-        
+        }       
     }
 }
