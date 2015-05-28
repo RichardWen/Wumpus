@@ -44,19 +44,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="Wumpus.cs" />
-    <Compile Include="Wumpi.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="mainGame.cs">
+    <Compile Include="..\..\..\..\WumpusMasterRewrite\WindowsFormsApplication3\mainGame.cs">
+      <Link>mainGame.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainGame.Designer.cs">
-      <DependentUpon>mainGame.cs</DependentUpon>
+    <Compile Include="..\..\..\..\WumpusMasterRewrite\WindowsFormsApplication3\Map.cs">
+      <Link>Map.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\..\WumpusMasterRewrite\WindowsFormsApplication3\Player.cs">
+      <Link>Player.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\WumpusMasterRewrite\WindowsFormsApplication3\Wumpi.cs">
+      <Link>Wumpi.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\WumpusMasterRewrite\WindowsFormsApplication3\Wumpus.cs">
+      <Link>Wumpus.cs</Link>
+    </Compile>
+    <Compile Include="Entity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -68,6 +79,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -80,6 +95,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\FloorRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FloorRed.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\Floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\FloorYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\WumpiBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\Wumpi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\WumpiNorthLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\WumpiNorthRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\WumpiSouthLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\WumpiSouthRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\MainBBy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\MainBby2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\MainBby3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\MainBby4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\MainBby5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Round1\MainBBy6.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

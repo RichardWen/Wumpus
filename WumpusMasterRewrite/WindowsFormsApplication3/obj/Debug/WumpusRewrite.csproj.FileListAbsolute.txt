@@ -1,16 +1,9 @@
+C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\HuntTheWumpus.Properties.Resources.resources
+C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\HuntTheWumpus.Resource1.resources
+C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\WumpusRewrite.csproj.GenerateResource.Cache
 C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\bin\Debug\m.exe.config
 C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\bin\Debug\m.exe
 C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\bin\Debug\m.pdb
-C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\WumpusRewrite.csprojResolveAssemblyReference.cache
-C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\WumpusRewrite.csproj.GenerateResource.Cache
 C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\m.exe
 C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\m.pdb
-C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\HuntTheWumpus.Properties.Resources.resources
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\bin\Debug\m.exe.config
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\m.exe
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\m.pdb
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\HuntTheWumpus.Properties.Resources.resources
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\WumpusRewrite.csproj.GenerateResource.Cache
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\bin\Debug\m.exe
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\bin\Debug\m.pdb
-C:\Users\Aaron\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\Wumpus-master\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\WumpusRewrite.csprojResolveAssemblyReference.cache
+C:\Users\Richard Wen\Documents\Visual Studio 2013\Projects\WumpusMasterRewrite\WindowsFormsApplication3\obj\Debug\WumpusRewrite.csprojResolveAssemblyReference.cache
