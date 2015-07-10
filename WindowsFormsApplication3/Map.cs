@@ -13,6 +13,7 @@ namespace HuntTheWumpus
         public int hexWidth;
         public int[,] map;
         public bool[,,] doors;
+        public bool inGame;
         private int mapHeight, mapWidth;
         private Bitmap Overlay = Properties.Resources.Movingborder3;
         private Bitmap Overlay2 = Properties.Resources.Border5;
@@ -149,98 +150,119 @@ namespace HuntTheWumpus
 
         public bool StartDraw(Player playerInstance, Wumpus wumpusInstance, Wumpi[] wumpisInstance, int score)
         {
-            int offsetX = 50 * (playerInstance.getCol() * 2 + 1);
-            int offsetY = 50 * (playerInstance.getRow() * 2 + 1 + playerInstance.getCol() % 2);
-            bool inGame = true;
-            {
-                for (int i = 0; i < mapHeight; i++)
+                int offsetX = 50 * (playerInstance.getCol() * 2 + 1);
+                int offsetY = 50 * (playerInstance.getRow() * 2 + 1 + playerInstance.getCol() % 2);
+                inGame = true;
                 {
-                    for (int j = 0; j < mapWidth; j++)
+                    for (int i = 0; i < mapHeight; i++)
                     {
-                        Point center = new Point(hexWidth * (j * 2 + 1), hexWidth * (i * 2 + 1 + j % 2));
-                        Point[] edges = new Point[6];
-                        mainGame.myGraphics.DrawImage(FloorBlue, center.X - 50, center.Y - 50);
-                        if (playerInstance.getRow() == i && playerInstance.getCol() == j)
+                        for (int j = 0; j < mapWidth; j++)
                         {
-                            foreach (Wumpi wumpi in wumpisInstance)
-                            {
-                                
-                                foreach (int[] seenTile in wumpi.sight)
-                                {
-                                    if (seenTile[0] == i && seenTile[1] == j)
-                                    {
-                                        mainGame.myGraphics.DrawImage(FloorRed, center.X - 50, center.Y - 50);
-                                    }
-                                    else
-                                    {
-                                        mainGame.myGraphics.DrawImage(FloorYellow, center.X - 50, center.Y - 50);
+                            Point center = new Point(hexWidth * (j * 2 + 1), hexWidth * (i * 2 + 1 + j % 2));
+                            Point[] edges = new Point[6];
+                            mainGame.myGraphics.DrawImage(FloorBlue, center.X - 50, center.Y - 50);
 
-                                    }
-                                }
-                                if (wumpi.getRow() == i && wumpi.getCol() == j && !wumpi.isKill())
+                            if (playerInstance.getKills() == mainGame.numberofWumpi)
+                            {
+                                mainGame.myGraphics.DrawImage(GameOver, 0, 0);
+                                inGame = false;
+                                Score scores = new Score();
+                                string scoreStr = "";
+                                if (score < 10)
                                 {
-                                    mainGame.myGraphics.DrawImage(GameOver, 0, 0);
-                                    inGame = false;
-                                    Score scores = new Score();
-                                    string scoreStr = "";
-                                    if(score < 10)
+                                    scoreStr = "00" + score;
+                                }
+                                else if (score < 100)
+                                {
+                                    scoreStr = "0" + score;
+                                }
+                                else
+                                {
+                                    scoreStr = "" + score;
+                                }
+                                scores.addScore("ABC" + scoreStr);
+                                return false;
+                            }
+                            if (playerInstance.getRow() == i && playerInstance.getCol() == j)
+                            {
+                                foreach (Wumpi wumpi in wumpisInstance)
+                                {
+
+                                    foreach (int[] seenTile in wumpi.sight)
                                     {
-                                        scoreStr = "00" + score;
+                                        if (seenTile[0] == i && seenTile[1] == j)
+                                        {
+                                            mainGame.myGraphics.DrawImage(FloorRed, center.X - 50, center.Y - 50);
+                                        }
+                                        else
+                                        {
+                                            mainGame.myGraphics.DrawImage(FloorYellow, center.X - 50, center.Y - 50);
+
+                                        }
                                     }
-                                    else if (score < 100)
+                                    if (wumpi.getRow() == i && wumpi.getCol() == j && !wumpi.isKill())
                                     {
-                                        scoreStr = "0" + score;
+                                        mainGame.myGraphics.DrawImage(GameOver, 0, 0);
+                                        inGame = false;
+                                        Score scores = new Score();
+                                        string scoreStr = "";
+                                        if (score < 10)
+                                        {
+                                            scoreStr = "00" + score;
+                                        }
+                                        else if (score < 100)
+                                        {
+                                            scoreStr = "0" + score;
+                                        }
+                                        else
+                                        {
+                                            scoreStr = "" + score;
+                                        }
+                                        scores.addScore("ABC" + scoreStr);
+                                        return false;
                                     }
-                                    else
-                                    {
-                                        scoreStr = "" + score;
-                                    }
-                                    scores.addScore("ABC" + scoreStr);
-                                    return false;
                                 }
                             }
+
+                            else if (wumpusInstance.getRow() == i && wumpusInstance.getCol() == j)
+                            {
+                                mainGame.myGraphics.DrawImage(FloorBlue, center.X - 50, center.Y - 50);
+                            }
+
                         }
 
-                        else if (wumpusInstance.getRow() == i && wumpusInstance.getCol() == j)
-                        {
-                            mainGame.myGraphics.DrawImage(FloorBlue, center.X - 50, center.Y - 50);
-                        }
+                        playerInstance.Draw();
 
                     }
 
-                    playerInstance.Draw();
-
-                }
-
-                foreach (int[] seenTile in playerInstance.sight)
-                {
-                    bool wumpiTile = false;
-                    Point seenCenter = new Point(hexWidth * (seenTile[1] * 2 + 1), hexWidth * (seenTile[0] * 2 + 1 + seenTile[1] % 2));
-                    foreach(Wumpi wumpi in wumpisInstance)
+                    foreach (int[] seenTile in playerInstance.sight)
                     {
-                        if (seenTile[0].Equals(wumpi.getRow()) && seenTile[1].Equals(wumpi.getCol()))
+                        bool wumpiTile = false;
+                        Point seenCenter = new Point(hexWidth * (seenTile[1] * 2 + 1), hexWidth * (seenTile[0] * 2 + 1 + seenTile[1] % 2));
+                        foreach (Wumpi wumpi in wumpisInstance)
                         {
-                            wumpiTile = true;
+                            if (seenTile[0].Equals(wumpi.getRow()) && seenTile[1].Equals(wumpi.getCol()))
+                            {
+                                wumpiTile = true;
+                                mainGame.myGraphics.DrawImage(FloorYellow, seenCenter.X - 50, seenCenter.Y - 50);
+                                wumpi.Draw();
+                            }
+                        }
+                        if (!wumpiTile)
+                        {
                             mainGame.myGraphics.DrawImage(FloorYellow, seenCenter.X - 50, seenCenter.Y - 50);
-                            wumpi.Draw();
                         }
+
                     }
-                    if (!wumpiTile)
-                    {
-                        mainGame.myGraphics.DrawImage(FloorYellow, seenCenter.X - 50, seenCenter.Y - 50);
-                    }
-            
+                    //   mainGame.myGraphics.DrawImage(Overlay2, 0, 0);
+
                 }
-             //   mainGame.myGraphics.DrawImage(Overlay2, 0, 0);
-
+                return true;
             }
-            return true;
-
-       
-        }
+         
         public void Clear()
         {
-            //mainGame.myGraphics.FillRectangle(mainGame.myTealBrush, 0, 0, mainGame.width, mainGame.height);
+            
         }
 
         public void drawBackground()

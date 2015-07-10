@@ -14,7 +14,8 @@ namespace HuntTheWumpus
         private Bitmap WumpiSE = Properties.Resources.WumpiSouthRight;
         private bool alive = true;
         public String state = "normal";
-        
+        public int killCount = 0;
+
         public Wumpi(int row, int col, int dir)
             : base(row, col, dir)
         {
@@ -75,6 +76,7 @@ namespace HuntTheWumpus
         public void kill()
         {
             alive = false;
+            mainGame.numberofWumpi--;
             Console.Out.WriteLine("KILL");
         }
         public bool isKill()

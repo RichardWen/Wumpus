@@ -13,6 +13,8 @@ namespace HuntTheWumpus
 {
     public partial class mainGame : Form
     {
+        public static StatusBarPanel gameStatus = new StatusBarPanel();
+        public static StatusBar mainStatusBar = new StatusBar(); 
         private Bitmap Overlay2 = Properties.Resources.Border5;
         public static System.Drawing.Pen myBlue = new Pen(Color.Blue, 2);
         public static System.Drawing.Pen myRed = new Pen(Color.Crimson, 2);
@@ -25,7 +27,7 @@ namespace HuntTheWumpus
         public static System.Drawing.Graphics myGraphics = null;
         public static int width;
         public static int height;
-
+        public static int numberofWumpi = 10;
         public Map myMap;
         public Player myPlayer;
         public Wumpus myWumpus;
@@ -36,30 +38,36 @@ namespace HuntTheWumpus
         
         public mainGame()
         {
-            
+            gameStatus.BorderStyle = StatusBarPanelBorderStyle.Sunken;
+            gameStatus.Text = "Press SPACE_BAR to play";
+            gameStatus.AutoSize = StatusBarPanelAutoSize.Spring;
+            mainStatusBar.Panels.Add(gameStatus);
+            mainStatusBar.ShowPanels = true;
+            this.Controls.Add(mainStatusBar); 
+
             Random rnd = new Random();
-            myMap = new Map(10, 18, 50);
+            myMap = new Map(10, 19, 50);
             myPlayer = new Player(5, 5, 0);
             myWumpus = new Wumpus(4, 4, 3);
-            myWumpis = new Wumpi[15];
-            for (int i = 0; i < 15; i++ )
+            myWumpis = new Wumpi[numberofWumpi];
+            for (int i = 0; i < numberofWumpi; i++ )
             {
                 myWumpis[i] = new Wumpi(rnd.Next(9), rnd.Next(17), rnd.Next(6));
             }
             this.Width = myMap.BufferX * 3 + myMap.getWidth() * myMap.getHex() * 2;
-            width = myMap.BufferX * 3 + myMap.getWidth() * myMap.getHex() * 2;
             this.Height = myMap.BufferY * 3 + myMap.getHeight() * myMap.getHex() * 2;
-            height = myMap.BufferY * 3 + myMap.getHeight() * myMap.getHex() * 2;
+            this.WindowState = FormWindowState.Maximized;
+            
             this.Refresh();
-           
+            
+            this.Show();
+            this.MenuStart();
         }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
             {
-                case Keys.Q:
-                    MenuStart();
-                    return true;
                 case Keys.Space:
                     Start();
                     return true;
@@ -76,16 +84,25 @@ namespace HuntTheWumpus
                     myPlayer.changeDir(1);
                     Update(false);
                     return true;
+                case Keys.R:
+                    this.restart();
+                    return true;
             }
             return false;
         }
-
+        public int enemyCount()
+        {
+            return numberofWumpi;
+        }
         public void Start()
         {
-            myGraphics = this.CreateGraphics();
             myMap.drawBackground();
+  
             myGraphics = this.CreateGraphics();
-       
+            gameStatus.Text = "Enemies Left: " + numberofWumpi;
+            gameStatus.AutoSize = StatusBarPanelAutoSize.Spring;
+            myMap.drawBackground();
+    
             myMap.StartDraw(myPlayer, myWumpus, myWumpis, score);
         }
 
@@ -96,11 +113,36 @@ namespace HuntTheWumpus
             myGraphics.DrawImage(CoverImage, 0, 0);
         }
 
+        public void restart()
+        {
+            gameStatus.Text = "Press SPACE_BAR to play";
+            gameStatus.AutoSize = StatusBarPanelAutoSize.Spring;
+            
+            Random rnd = new Random();
+            myMap = new Map(10, 19, 50);
+            myPlayer = new Player(5, 5, 0);
+            myWumpus = new Wumpus(4, 4, 3);
+            myWumpis = new Wumpi[numberofWumpi];
+            for (int i = 0; i < numberofWumpi; i++)
+            {
+                myWumpis[i] = new Wumpi(rnd.Next(9), rnd.Next(17), rnd.Next(6));
+            }
+            this.Width = myMap.BufferX * 3 + myMap.getWidth() * myMap.getHex() * 2;
+            this.Height = myMap.BufferY * 3 + myMap.getHeight() * myMap.getHex() * 2;
+            this.WindowState = FormWindowState.Maximized;
+
+            this.Refresh();
+
+            this.Show();
+            this.MenuStart();
+        }
+
         public void Update(bool wumpi)
         {
             if(myPlayer.UpdateSight(myMap, myWumpis, score))
             {
                 score += 100;
+    
             }
             foreach(int[] seenTile in myPlayer.sight)
             {

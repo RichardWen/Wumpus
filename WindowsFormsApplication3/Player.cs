@@ -13,7 +13,8 @@ namespace HuntTheWumpus
         private Bitmap PlayerSW = Properties.Resources.MainBby3;
         private Bitmap PlayerSE = Properties.Resources.MainBby4;
         private int knifeParts = 0;
-       
+        public int killCount = 0;
+
         public Player(int row, int col, int dir)
             : base(row, col, dir)
         {
@@ -63,6 +64,10 @@ namespace HuntTheWumpus
                 return true;
             }
             return false;
+        }
+        public int getKills()
+        {
+            return killCount;
         }
         public bool UpdateSight(Map map, Wumpi[] wumpis, int score)
         {
@@ -121,6 +126,10 @@ namespace HuntTheWumpus
                     if(Math.Abs(wumpi.getDir() - this.getDir()) < 2)
                     {
                         wumpi.kill();
+                        mainGame.gameStatus.Text = "Enemies Left: " + mainGame.numberofWumpi;
+                        mainGame.gameStatus.AutoSize = StatusBarPanelAutoSize.Spring;
+        
+                        killCount++;
                         score += 100;
                         return true;
                     }
